@@ -8,6 +8,6 @@
 ---
 
 ## ✅ 快速开始（3步）
-1. **安装依赖**（在 R 中运行）：
+1. **安装Package**（在 R 中运行）：
    ```r
    install.packages(c("shiny", "dplyr", "ggplot2", "palmerpenguins"))
