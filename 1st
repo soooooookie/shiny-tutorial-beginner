@@ -1,0 +1,35 @@
+library(shiny)
+
+# 1. 定义UI（用户界面）
+ui <- fluidPage(
+  titlePanel("我的第一个Shiny应用"),
+  sidebarLayout(
+    sidebarPanel(
+      # 滑块输入组件
+      sliderInput("bins", 
+                  "直方图柱数:",
+                  min = 1,
+                  max = 50,
+                  value = 30)
+    ),
+    mainPanel(
+      # 图表输出组件
+      plotOutput("distPlot")
+    )
+  )
+)
+
+# 2. 定义服务器逻辑（交互逻辑）
+server <- function(input, output) {
+  # 渲染直方图
+  output$distPlot <- renderPlot({
+    x    <- faithful[, 2]  # 内置数据集
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    
+    hist(x, breaks = bins, col = "#1E40AF", 
+         border = "white", main = "等待时间分布")
+  })
+}
+
+# 3. 运行应用
+shinyApp(ui = ui, server = server)
